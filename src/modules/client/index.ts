@@ -2,6 +2,8 @@ import { Elysia } from "elysia";
 import { Enviroments } from "../../shared/config/enviroments";
 import Logger from "../../shared/utils/logger/logger";
 import SetupRoutes from "../routes/routes";
+import openapi, { fromTypes } from "@elysiajs/openapi";
+import { AppDataSource } from "../database/dataSource";
 
 export default class Application {
   protected instance: Elysia;
@@ -12,6 +14,11 @@ export default class Application {
 
   private decore() {
     this.instance.decorate("logger", new Logger());
+    this.instance.use(
+      openapi({
+        references: fromTypes(),
+      })
+    );
     return this;
   }
 
@@ -21,6 +28,7 @@ export default class Application {
 
   async start() {
     this.decore();
+    await AppDataSource.initialize();
 
     await SetupRoutes(this.instance);
 
