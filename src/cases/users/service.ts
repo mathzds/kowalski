@@ -2,7 +2,7 @@ import BaseRepository from '../../shared/utils/baseRepository';
 import IUserInterface, { IUserRepository } from '../../shared/interfaces/user';
 import { UserSchema } from '../../modules/database/schemas/user';
 
-export default class UserRepository extends BaseRepository<UserSchema> implements IUserRepository {
+export default class UserService extends BaseRepository<UserSchema> implements IUserRepository {
   constructor() {
     super(UserSchema);
   }
