@@ -1,0 +1,20 @@
+{
+  "name": "app",
+  "version": "1.0.50",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "bun run --watch src/index.ts",
+    "biome:lint": "bunx biome check --write"
+  },
+  "dependencies": {
+    "elysia": "latest",
+    "reflect-metadata": "^0.2.2",
+    "sqlite3": "^5.1.7",
+    "typeorm": "^0.3.26"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.2.4",
+    "bun-types": "latest"
+  },
+  "module": "src/index.js"
+}

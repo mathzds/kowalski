@@ -1,0 +1,34 @@
+import { Elysia } from "elysia";
+import { Enviroments } from "../../shared/config/enviroments";
+import Logger from "../../shared/utils/logger/logger";
+import SetupRoutes from "../routes/routes";
+
+export default class Application {
+  protected instance: Elysia;
+
+  constructor() {
+    this.instance = new Elysia();
+  }
+
+  private decore() {
+    this.instance.decorate("logger", new Logger());
+    return this;
+  }
+
+  getInstance() {
+    return this.instance;
+  }
+
+  async start() {
+    this.decore();
+
+    await SetupRoutes(this.instance);
+
+    const port = Enviroments.APP_PORT;
+    const server = this.instance.listen(Enviroments.APP_PORT);
+
+    console.log(`Running on ${port}`);
+
+    return server;
+  }
+}
